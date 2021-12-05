@@ -26,6 +26,16 @@ public class MainActivity extends AppCompatActivity {
     private final int textSize = 50;
 
     private Timer timer = new Timer();
+    private int grenzeLinks = 30;
+    private int grenzeRechts = 770;
+    private int grenzeOben = 400;
+    private int grenzeUnten = 770;
+
+    private int ballRadius = 20;
+    private float ballX = 100f;
+    private float ballY = 700f;
+    private float velociteX = 0.3f;
+    private float velociteY = 4.5f;
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -97,7 +107,28 @@ public class MainActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void derSpringendePunkt(){
+        /*
         Log.i("MainActivity", LocalDateTime.now()
-                + ": der springende Punkt");
+                + ": der springende Punkt");*/
+        zeichneSmiley(200);
+
+        this.hwite.setColor(Color.BLUE);
+        ozjung.drawCircle(ballX,ballY,ballRadius,hwite);
+
+        if(ballX>grenzeRechts || ballX < grenzeLinks){
+            velociteX*=-1;
+        }
+        if(ballY>grenzeUnten || ballY <grenzeOben){
+            velociteY*=-1;
+        }
+
+        ballX += velociteX;
+        ballY += velociteY;
+
+        this.hwite.setColor(Color.RED);
+        ozjung.drawCircle(ballX,ballY,ballRadius,hwite);
+
+        this.imageView.invalidate();
+
     }
 }
